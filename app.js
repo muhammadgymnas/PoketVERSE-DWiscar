@@ -20,8 +20,12 @@ function App() {
   const [prev, setPrev] = React.useState(null);
   const [tab, setTab] = React.useState('home');
   const [character, setCharacter] = React.useState('caca');
-  // Whether to flash a "Poket created" toast on next Detail screen view
   const [showCreatedToast, setShowCreatedToast] = React.useState(false);
+  const [darkStage, setDarkStage] = React.useState(false);
+
+  React.useEffect(() => {
+    document.body.classList.toggle('dark-stage', darkStage);
+  }, [darkStage]);
 
   const go = (toIdx) => {
     if (toIdx === active) return;
@@ -86,7 +90,12 @@ function App() {
 
   return (
     <>
-      <div className="stage-label">PoketVERSE &middot; Live Prototype &middot; D&rsquo;Wiscar Co. &middot; GBCC 2026</div>
+      <div className="stage-top">
+        <div className="stage-label">PoketVERSE &middot; Live Prototype &middot; D&rsquo;Wiscar Co. &middot; GBCC 2026</div>
+        <button className="stage-theme-toggle" onClick={() => setDarkStage(d => !d)} title="Toggle dark/light stage">
+          {darkStage ? '☀️ Light' : '🌙 Dark'}
+        </button>
+      </div>
 
       <div className="device">
         <div className="dynamic-island"></div>
